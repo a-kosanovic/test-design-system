@@ -1,0 +1,10 @@
+{
+  "words": ["Brandwatch"],
+  "ignorePaths": [
+    "package.json",
+    "package-lock.json",
+    ".vscode/**",
+    ".prettierrc.json"
+  ],
+  "useGitignore": true
+}
