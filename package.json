@@ -7,7 +7,8 @@
   "scripts": {
     "test": "npm run test",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -28,7 +29,10 @@
     "@storybook/manager-webpack4": "^6.5.10",
     "@storybook/web-components": "^6.5.10",
     "babel-loader": "^8.2.5",
-    "lit-html": "^2.3.1"
-  },
-  "dependencies": {}
+    "husky": "^8.0.1",
+    "lit-html": "^2.3.1",
+    "npm-merge-driver": "^2.3.6",
+    "prettier": "^2.7.1",
+    "pretty-quick": "^3.1.3"
+  }
 }
