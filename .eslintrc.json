@@ -1,0 +1,35 @@
+{
+  "root": true,
+  "plugins": ["@typescript-eslint", "wc", "lit", "lit-a11y", "import"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:wc/recommended",
+    "plugin:wc/best-practice",
+    "plugin:lit/recommended",
+    "plugin:lit-a11y/recommended"
+  ],
+  "env": {
+    "es2021": true,
+    "browser": true
+  },
+  "reportUnusedDisableDirectives": true,
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "overrides": [
+    {
+      "extends": [],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+      },
+      "files": ["*.ts"],
+      "rules": {
+        "wc/guard-super-call": "off",
+        "@typescript-eslint/unbound-method": "off",
+        "@typescript-eslint/no-floating-promises": "off"
+      }
+    }
+  ]
+}
