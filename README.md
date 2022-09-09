@@ -1,3 +1,3 @@
 # design-system
 
-Scaffolding a component library using
+Prototyping infrastructure for a new Design System.
