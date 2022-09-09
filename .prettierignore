@@ -5,3 +5,4 @@ CHANGELOG.md
 *.hbs
 .changeset/*.md
 public
+tsconfig.json
