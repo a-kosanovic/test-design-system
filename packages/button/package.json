@@ -1,0 +1,28 @@
+{
+  "name": "button",
+  "version": "1.0.0",
+  "description": "A button",
+  "main": "./src/index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "web-dev-server",
+    "test": "web-test-runner",
+    "test:watch": "web-test-runner --watch"
+  },
+  "files": [
+    "src",
+    "dist",
+    "custom-elements.json",
+    "!**/*.test.*",
+    "!**/*.stories.*"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lit": "^2.3.1"
+  },
+  "devDependencies": {
+    "@web/dev-server": "^0.1.34",
+    "@web/test-runner": "^0.14.0"
+  }
+}
