@@ -1,5 +1,5 @@
 {
-  "words": ["Brandwatch"],
+  "words": ["Brandwatch", "esbuild", "globby"],
   "ignorePaths": [
     "package.json",
     "package-lock.json",
