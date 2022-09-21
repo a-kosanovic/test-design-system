@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "start": "start-storybook -p 6006",
+    "build:storybook": "build-storybook",
     "test": "wtr",
     "test:component": "npm run test -- --group",
     "test:watch": "wtr --watch",
@@ -17,7 +18,9 @@
     "type": "git",
     "url": "git+https://github.com/brandwatch/design-system.git"
   },
-  "author": "Brandwatch",
+  "author": {
+    "name": "Brandwatch"
+  },
   "type": "module",
   "license": "MIT",
   "bugs": {
