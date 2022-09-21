@@ -1,3 +1,4 @@
+// rename to .js once upgraded to storybook 7
 module.exports = {
   stories: ['../packages/**/*.stories.@(js|ts|mdx)'],
   addons: [
