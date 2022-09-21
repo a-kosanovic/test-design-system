@@ -1,0 +1,33 @@
+name: 'Validate Pull Request'
+
+# What it does: Runs tests/linting
+# Why we have it: To ensure code is tested and formatted before being able to merge to main.
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        run: echo ::set-output name=NVMRC::$(cat .nvmrc)
+        id: nvm
+        uses: actions/setup-node@v3
+        with:
+          node-version: '${{ steps.nvm.outputs.NVMRC }}'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Unit tests
+        run: npm run test
