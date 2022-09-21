@@ -1,6 +1,6 @@
 name: 'Validate Pull Request'
 
-# What it does: Runs tests/linting
+# What it does: Runs tests/linting and deploys to Chromatic for design review.
 # Why we have it: To ensure code is tested and formatted before being able to merge to main.
 
 on:
