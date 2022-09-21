@@ -16,9 +16,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup node
+      - name: Get node version
         run: echo ::set-output name=NVMRC::$(cat .nvmrc)
         id: nvm
+
+      - name: Setup node
         uses: actions/setup-node@v3
         with:
           node-version: '${{ steps.nvm.outputs.NVMRC }}'
