@@ -1,0 +1,20 @@
+{
+  "name": "tooltip",
+  "version": "1.0.0",
+  "description": "Lit Component ",
+  "type": "module",
+  "scripts": {
+    "start": "web-dev-server",
+    "test": "web-test-runner",
+    "test:watch": "web-test-runner --watch"
+  },
+  "files": [
+    "src",
+    "dist",
+    "custom-elements.json",
+    "!**/*.test.*",
+    "!**/*.stories.*"
+  ],
+  "author": "design-system-squad",
+  "license": "ISC"
+}
