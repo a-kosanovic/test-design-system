@@ -1,9 +1,14 @@
 import {html, LitElement} from 'lit';
 import {customElement} from 'lit/decorators.js';
+import {query} from 'lit/decorators/query.js';
+
 import styles from './tooltip.styles';
 
 @customElement('ds-tooltip')
 export class Tooltip extends LitElement {
+  @query('#tooltip')
+  _tooltip: HTMLDivElement;
+
   static styles = [...styles];
 
   static properties = {
@@ -24,19 +29,31 @@ export class Tooltip extends LitElement {
   }
 
   showTooltip() {
-    this.style.visibility = '';
-    this.style.cssText = '';
+    console.log('tooltip ', this._tooltip);
+    this._tooltip.style.visibility = '';
+    this._tooltip.style.cssText = '';
   }
 
   hideTooltip() {
-    this.style.visibility = 'hidden';
-    this.style.opacity = '0';
+    console.log('tooltip ', this._tooltip);
+    this._tooltip.style.visibility = 'hidden';
+    this._tooltip.style.opacity = '0';
   }
 
   render() {
     return html`
-      <span class="arrow"></span>
-      <slot></slot>
+      <slot
+        name="invoker"
+        @mouseenter=${this.showTooltip}
+        @mouseleave=${this.hideTooltip}
+      >
+      </slot>
+
+      <div id="tooltip">
+        <!-- Todo: match the style of axiom-web -->
+        <!-- <span class="arrow"></span> -->
+        <slot name="content"></slot>
+      </div>
     `;
   }
 }

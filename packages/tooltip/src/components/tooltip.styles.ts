@@ -17,21 +17,22 @@ export default [
       --arrow-width: 0.75rem;
       --arrow-offset: calc(var(--arrow-width) / -2);
       --tip-size: 0.75rem;
-
-      position: absolute;
-      inset: 0px auto auto 0px;
-      margin: 0px;
-      transform: translate(30px, 59px);
     }
 
-    ::slotted(*) {
+    .tooltip {
       position: absolute;
+      display: block;
+      transform: translate(30px, 59px);
+      margin: 0px;
+
       border-radius: var(--border-radius, 0.1875rem);
       box-shadow: var(--box-shadow);
+      inset: 0px auto auto 0px;
+
       background-color: var(--background-color, white);
       color: var(--text-color);
-      display: block;
       overflow-y: auto;
+
       scroll-behavior: smooth;
     }
 

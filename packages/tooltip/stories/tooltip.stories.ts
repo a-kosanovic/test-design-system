@@ -13,10 +13,10 @@ export default config;
 
 function Template(args): any {
   return html`
-    <ds-button></ds-button>
-
     <ds-tooltip isvisible=${args.Visible}>
-      <div>Hello from Tooltip</div>
+      <ds-button slot="invoker"></ds-button>
+
+      <div slot="content">Hello from Tooltip</div>
     </ds-tooltip>
   `;
 }

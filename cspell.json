@@ -1,5 +1,13 @@
 {
-  "words": ["Brandwatch", "esbuild", "globby"],
+  "words": [
+    "Brandwatch",
+    "codepaths",
+    "esbuild",
+    "globby",
+    "tsbuildinfo",
+    "optimizelegibility",
+    "Roboto"
+  ],
   "ignorePaths": [
     "package.json",
     "package-lock.json",
