@@ -5,19 +5,23 @@
   "private": true,
   "scripts": {
     "start": "start-storybook -p 6006",
+    "build:storybook": "build-storybook",
     "test": "wtr",
     "test:component": "npm run test -- --group",
     "test:watch": "wtr --watch",
     "lint": "eslint --max-warnings 0",
     "lint:fix": "eslint --max-warnings 0 --fix",
     "prepare": "husky install",
-    "create:component": "plop --plopfile plop/plopfile.js"
+    "create:component": "plop --plopfile plop/plopfile.js",
+    "chromatic": "chromatic --exit-zero-on-changes"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/brandwatch/design-system.git"
   },
-  "author": "Brandwatch",
+  "author": {
+    "name": "Brandwatch"
+  },
   "type": "module",
   "license": "MIT",
   "bugs": {
@@ -29,22 +33,24 @@
   ],
   "devDependencies": {
     "@open-wc/testing": "^3.1.6",
-    "@storybook/addon-a11y": "^6.5.10",
-    "@storybook/addon-actions": "^6.5.10",
-    "@storybook/addon-essentials": "^6.5.10",
-    "@storybook/addon-links": "^6.5.10",
-    "@storybook/builder-webpack4": "^6.5.10",
-    "@storybook/manager-webpack4": "^6.5.10",
-    "@storybook/web-components": "^6.5.10",
+    "@storybook/addon-a11y": "^6.5.12",
+    "@storybook/addon-actions": "^6.5.12",
+    "@storybook/addon-essentials": "^6.5.12",
+    "@storybook/addon-links": "^6.5.12",
+    "@storybook/builder-webpack4": "^6.5.12",
+    "@storybook/manager-webpack4": "^6.5.12",
+    "@storybook/web-components": "^6.5.12",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
     "@typescript-eslint/parser": "^5.36.2",
     "@web/dev-server": "^0.1.34",
     "@web/dev-server-esbuild": "^0.3.2",
     "@web/test-runner": "^0.14.0",
+    "chromatic": "^6.9.0",
     "eslint": "^8.23.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-lit": "^1.6.1",
     "eslint-plugin-lit-a11y": "^2.2.2",
+    "eslint-plugin-storybook": "^0.6.4",
     "eslint-plugin-wc": "^1.3.2",
     "globby": "^13.1.2",
     "husky": "^8.0.1",
