@@ -7,4 +7,16 @@ module.exports = {
     '@storybook/addon-a11y',
   ],
   framework: '@storybook/web-components',
+  babel: async (options) => {
+    Object.assign(
+      options.plugins.find((plugin) =>
+        plugin[0].includes('plugin-proposal-decorators')
+      )[1],
+      {
+        decoratorsBeforeExport: true,
+        legacy: false,
+      }
+    );
+    return options;
+  },
 };
