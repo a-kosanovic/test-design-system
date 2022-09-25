@@ -1,0 +1,45 @@
+name: 'Validate Pull Request'
+
+# What it does: Runs tests/linting and deploys to Chromatic for design review.
+# Why we have it: To ensure code is tested and formatted before being able to merge to main.
+
+on:
+  pull_request:
+    branches:
+      - main
+
+env:
+  CI: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # 👈 Required to retrieve git history for Chromatic
+
+      - name: Get node version
+        run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
+        id: nvm
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '${{ steps.nvm.outputs.NODE_VERSION }}'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Unit tests
+        run: npm run test
+
+      - name: Publish to Chromatic
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
