@@ -1,13 +1,28 @@
 import {html, LitElement} from 'lit';
+
 import {customElement} from 'lit/decorators.js';
 import {query} from 'lit/decorators/query.js';
+import {property} from 'lit/decorators/property.js';
+import {queryAssignedElements} from 'lit/decorators/query-assigned-elements.js';
+import {queryAssignedNodes} from 'lit/decorators/query-assigned-nodes.js';
 
 import styles from './tooltip.styles';
 
+import {computePosition, autoPlacement, offset, shift} from '@floating-ui/dom';
+
 @customElement('ds-tooltip')
 export class Tooltip extends LitElement {
+  @property({type: Number})
+  offset = 4;
+
   @query('#tooltip')
-  _tooltip: HTMLDivElement;
+  tooltip: HTMLDivElement;
+
+  @queryAssignedElements({slot: 'invoker'})
+  _invoker: Array<SlotAssignmentMode>;
+
+  @queryAssignedNodes({slot: 'content', flatten: true})
+  _content!: Node;
 
   static styles = [...styles];
 
@@ -28,16 +43,31 @@ export class Tooltip extends LitElement {
     }
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+  }
+
   showTooltip() {
-    console.log('tooltip ', this._tooltip);
-    this._tooltip.style.visibility = '';
-    this._tooltip.style.cssText = '';
+    this.tooltip.style.cssText = ''; // restart all styles applied
+
+    computePosition(this._invoker[0], this.tooltip, {
+      strategy: 'fixed',
+      middleware: [
+        offset(this.offset),
+        shift(),
+        autoPlacement({allowedPlacements: ['top', 'bottom']}),
+      ],
+    }).then(({x, y}) => {
+      Object.assign(this.tooltip.style, {
+        left: `${x}px`,
+        top: `${y}px`,
+      });
+    });
   }
 
   hideTooltip() {
-    console.log('tooltip ', this._tooltip);
-    this._tooltip.style.visibility = 'hidden';
-    this._tooltip.style.opacity = '0';
+    this.tooltip.style.visibility = 'hidden';
+    this.tooltip.style.opacity = '0';
   }
 
   render() {

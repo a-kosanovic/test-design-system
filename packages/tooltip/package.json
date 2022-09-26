@@ -16,5 +16,8 @@
     "!**/*.stories.*"
   ],
   "author": "design-system-squad",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@floating-ui/dom": "^1.0.2"
+  }
 }
