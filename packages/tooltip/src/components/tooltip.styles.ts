@@ -19,11 +19,12 @@ export default [
       --tip-size: 0.75rem;
     }
 
-    #tooltip {
-      position: absolute;
-      display: block;
+    ::slotted(div) {
+      // position: absolute;
+      display: inline-block;
       // transform: translate(30px, 59px);
       margin: 0px;
+      padding: 4px;
 
       border-radius: var(--border-radius, 0.1875rem);
       box-shadow: var(--box-shadow);

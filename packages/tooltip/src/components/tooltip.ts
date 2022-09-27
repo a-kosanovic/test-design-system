@@ -15,24 +15,22 @@ export class Tooltip extends LitElement {
   @property({type: Number})
   offset = 4;
 
+  @property({type: Boolean})
+  isVisible = false;
+
   @query('#tooltip')
-  tooltip: HTMLDivElement;
+  tooltip!: HTMLDivElement;
 
   @queryAssignedElements({slot: 'invoker'})
-  _invoker: Array<SlotAssignmentMode>;
+  _invoker!: Array<SlotAssignmentMode>;
 
   @queryAssignedNodes({slot: 'content', flatten: true})
   _content!: Node;
 
   static styles = [...styles];
 
-  static properties = {
-    isVisible: {},
-  };
-
   constructor() {
     super();
-    this.isVisible = false;
   }
 
   updated(changedProperties) {
@@ -53,9 +51,9 @@ export class Tooltip extends LitElement {
     computePosition(this._invoker[0], this.tooltip, {
       strategy: 'fixed',
       middleware: [
-        offset(this.offset),
+        offset(10),
         shift(),
-        autoPlacement({allowedPlacements: ['top', 'bottom']}),
+        autoPlacement({allowedPlacements: ['bottom', 'right']}),
       ],
     }).then(({x, y}) => {
       Object.assign(this.tooltip.style, {
