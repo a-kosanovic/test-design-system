@@ -5,7 +5,8 @@ const config = {
   title: 'Components/Tooltip',
   component: 'ds-tooltip',
   argTypes: {
-    Visible: {control: 'boolean', default: true},
+    Disabled: {control: 'boolean', defaultValue: true},
+    TooltipContent: {control: 'text', defaultValue: 'Hello Tooltip'},
   },
 };
 
@@ -13,10 +14,11 @@ export default config;
 
 function Template(args): any {
   return html`
-    <ds-tooltip isvisible=${args.Visible}>
-      <ds-button slot="invoker"></ds-button>
-
-      <div slot="content">Hello from Tooltip</div>
+    <ds-tooltip
+      isvisible=${!args.Disabled}
+      tooltipContent=${args.TooltipContent}
+    >
+      <ds-button disabled="disabled" slot="invoker"></ds-button>
     </ds-tooltip>
   `;
 }

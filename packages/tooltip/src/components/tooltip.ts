@@ -18,8 +18,8 @@ export class Tooltip extends LitElement {
   @property({type: Boolean})
   isVisible = false;
 
-  @query('#tooltip')
-  tooltip!: HTMLDivElement;
+  @property({type: String})
+  tooltipContent = '';
 
   @queryAssignedElements({slot: 'invoker'})
   _invoker!: Array<SlotAssignmentMode>;
@@ -28,6 +28,9 @@ export class Tooltip extends LitElement {
   _content!: Node;
 
   static styles = [...styles];
+
+  isCreated = false;
+  tooltip: HTMLElement | undefined = undefined;
 
   constructor() {
     super();
@@ -45,27 +48,58 @@ export class Tooltip extends LitElement {
     super.connectedCallback();
   }
 
-  showTooltip() {
-    this.tooltip.style.cssText = ''; // restart all styles applied
-
-    computePosition(this._invoker[0], this.tooltip, {
+  _computeTooltipPosition(
+    invokerElement: HTMLElement,
+    tooltipElement: HTMLElement
+  ): Promise<{x: Number; y: Number}> {
+    return computePosition(invokerElement, tooltipElement, {
       strategy: 'fixed',
       middleware: [
         offset(10),
         shift(),
         autoPlacement({allowedPlacements: ['bottom', 'right']}),
       ],
-    }).then(({x, y}) => {
-      Object.assign(this.tooltip.style, {
-        left: `${x}px`,
-        top: `${y}px`,
-      });
     });
   }
 
+  showTooltip() {
+    const invokerElement = this._invoker[0] as unknown as HTMLElement;
+
+    if (!this.isCreated) {
+      this.lazy(invokerElement);
+      this.isCreated = true;
+    }
+
+    this.tooltip!.style.cssText = ''; // restart all styles applied
+
+    // position the tooltip
+    this._computeTooltipPosition(invokerElement, this.tooltip!).then(
+      ({x, y}) => {
+        Object.assign(this.tooltip!.style, {
+          left: `${x}px`,
+          top: `${y}px`,
+        });
+      }
+    );
+  }
+
   hideTooltip() {
-    this.tooltip.style.visibility = 'hidden';
-    this.tooltip.style.opacity = '0';
+    this.tooltip!.style.visibility = 'hidden';
+    this.tooltip!.style.opacity = '0';
+  }
+
+  // static
+  lazy(invokerElement: Element) {
+    console.log('lazy');
+    this.tooltip = document.createElement('div') as unknown as Tooltip;
+    this.tooltip.setAttribute('id', 'tooltip');
+
+    this.tooltip.textContent = this.tooltipContent;
+
+    // Append the content
+    (invokerElement.parentNode as HTMLElement)!.shadowRoot!.append(
+      this.tooltip
+    );
   }
 
   render() {
@@ -76,12 +110,6 @@ export class Tooltip extends LitElement {
         @mouseleave=${this.hideTooltip}
       >
       </slot>
-
-      <div id="tooltip">
-        <!-- Todo: match the style of axiom-web -->
-        <!-- <span class="arrow"></span> -->
-        <slot name="content"></slot>
-      </div>
     `;
   }
 }
